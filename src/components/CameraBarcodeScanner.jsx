@@ -66,8 +66,8 @@ export default function CameraBarcodeScanner({
 
       if (typeof window !== 'undefined' && window.isSecureContext === false) {
         setPhase('error');
-        setError('Akses kamera butuh HTTPS atau localhost.');
-        setStatus('Buka halaman ini lewat HTTPS atau localhost.');
+        setError('Akses kamera butuh HTTPS.');
+        setStatus('Buka halaman ini lewat HTTPS.');
         return;
       }
 

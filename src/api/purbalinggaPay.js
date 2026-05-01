@@ -1,6 +1,6 @@
 import { clearStoredAuth, getStoredToken } from '../auth/authStorage';
 
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api').replace(/\/$/, '');
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'https://apismartpay.qode.my.id/api').replace(/\/$/, '');
 
 async function request(path, { method = 'GET', body, token, headers } = {}) {
   const authToken = token === undefined ? getStoredToken() : token;

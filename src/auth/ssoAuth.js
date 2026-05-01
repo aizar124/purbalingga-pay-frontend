@@ -1,10 +1,10 @@
-const SSO_BASE_URL = (import.meta.env.VITE_SSO_URL || 'http://localhost:4000').replace(/\/$/, '');
+const SSO_BASE_URL = (import.meta.env.VITE_SSO_URL || 'https://apisso.qode.my.id').replace(/\/$/, '');
 const SSO_CLIENT_ID = import.meta.env.VITE_SSO_CLIENT_ID || 'purbalingga-pay';
-const SSO_REDIRECT_URI = import.meta.env.VITE_SSO_REDIRECT_URI || 'http://localhost:5173/callback';
+const SSO_REDIRECT_URI = import.meta.env.VITE_SSO_REDIRECT_URI || 'https://smartpay.qode.my.id/callback';
 const SSO_SCOPE = import.meta.env.VITE_SSO_SCOPE || 'openid profile email';
-const SSO_LOGIN_URL = import.meta.env.VITE_SSO_LOGIN_URL || 'http://localhost:5174/login';
-const SSO_DASHBOARD_URL = import.meta.env.VITE_SSO_DASHBOARD_URL || 'http://localhost:5174/dashboard';
-const SSO_LOGOUT_URL = import.meta.env.VITE_SSO_LOGOUT_URL || 'http://localhost:5174/logout';
+const SSO_LOGIN_URL = import.meta.env.VITE_SSO_LOGIN_URL || 'https://sso.qode.my.id/login';
+const SSO_DASHBOARD_URL = import.meta.env.VITE_SSO_DASHBOARD_URL || 'https://sso.qode.my.id/dashboard';
+const SSO_LOGOUT_URL = import.meta.env.VITE_SSO_LOGOUT_URL || 'https://sso.qode.my.id/logout';
 
 const PKCE_VERIFIER_KEY = 'purbalingga-pay-sso-pkce-verifier';
 const PKCE_STATE_KEY = 'purbalingga-pay-sso-state';

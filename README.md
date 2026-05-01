@@ -33,5 +33,5 @@ npm run build
 
 Salin `.env.example` menjadi `.env` lalu set:
 
-- `VITE_API_BASE_URL` ke URL backend lokal, contoh `http://localhost:8000/api`
-- `VITE_SSO_LOGIN_URL`, `VITE_SSO_DASHBOARD_URL`, dan `VITE_SSO_LOGOUT_URL` ke frontend SSO, contoh `http://localhost:5174`
+- `VITE_API_BASE_URL` ke URL backend, contoh `https://apismartpay.qode.my.id/api`
+- `VITE_SSO_LOGIN_URL`, `VITE_SSO_DASHBOARD_URL`, dan `VITE_SSO_LOGOUT_URL` ke frontend SSO, contoh `https://sso.qode.my.id`
