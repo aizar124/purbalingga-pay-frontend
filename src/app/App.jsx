@@ -10,6 +10,9 @@ import ProfileRedirectPage from '../pages/ProfileRedirectPage';
 import SsoCallbackPage from '../pages/SsoCallbackPage';
 import BarcodeTestPage from '../pages/BarcodeTestPage';
 import VoucherPage from '../pages/VoucherPage';
+import TopUpPage from '../pages/TopUpPage';
+import SimulasiGatewayPage from '../pages/SimulasiGatewayPage';
+import TopUpSuccessPage from '../pages/TopUpSuccessPage';
 
 function HomeRedirect() {
   const { isAuthenticated, loading } = useAuth();
@@ -56,6 +59,30 @@ export default function App() {
         element={
           <ProtectedRoute>
             <HistoryPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/topup"
+        element={
+          <ProtectedRoute>
+            <TopUpPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/topup/gateway"
+        element={
+          <ProtectedRoute>
+            <SimulasiGatewayPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/topup/success"
+        element={
+          <ProtectedRoute>
+            <TopUpSuccessPage />
           </ProtectedRoute>
         }
       />

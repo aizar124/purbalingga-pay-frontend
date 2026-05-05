@@ -89,6 +89,14 @@ export async function createTransactionApi(token, payload) {
   });
 }
 
+export async function simulateTopupPaymentApi(transactionId, token, action) {
+  return request(`/transactions/${transactionId}/simulate-payment`, {
+    method: 'POST',
+    body: { action },
+    token,
+  });
+}
+
 export async function vouchersApi(token) {
   return request('/vouchers', { token });
 }

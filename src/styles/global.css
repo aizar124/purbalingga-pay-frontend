@@ -568,6 +568,19 @@ input {
   gap: 10px;
 }
 
+.topup-cta-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cta-title {
+  margin: 0 0 8px;
+  font-family: Sora, Inter, system-ui, sans-serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+}
+
 .card-stack {
   display: grid;
   gap: 12px;
@@ -624,6 +637,172 @@ input {
   border-radius: 16px;
   padding: 14px 16px;
   color: var(--ink);
+}
+
+.topup-grid,
+.gateway-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.8fr);
+  gap: 18px;
+}
+
+.topup-panel,
+.topup-summary-card,
+.gateway-receipt,
+.gateway-side {
+  display: grid;
+  gap: 18px;
+}
+
+.amount-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.amount-chip,
+.method-card {
+  border: 1px solid rgba(18, 49, 77, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 12px 14px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.amount-chip.active,
+.method-card.active {
+  border-color: rgba(13, 99, 200, 0.18);
+  background: rgba(13, 99, 200, 0.08);
+  box-shadow: 0 12px 24px rgba(13, 99, 200, 0.08);
+}
+
+.manual-amount {
+  display: grid;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.manual-amount input {
+  border: 1px solid rgba(18, 49, 77, 0.12);
+  background: white;
+  border-radius: 16px;
+  padding: 14px 16px;
+  color: var(--ink);
+}
+
+.method-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.method-card {
+  display: grid;
+  gap: 4px;
+}
+
+.method-title {
+  font-weight: 800;
+}
+
+.summary-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.summary-row,
+.gateway-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(13, 99, 200, 0.05);
+  border: 1px solid rgba(13, 99, 200, 0.08);
+}
+
+.topup-note {
+  padding-top: 4px;
+}
+
+.gateway-summary {
+  display: grid;
+  gap: 10px;
+}
+
+.gateway-instruction {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(13, 99, 200, 0.06);
+  border: 1px solid rgba(13, 99, 200, 0.1);
+}
+
+.gateway-instruction-title {
+  margin: 0;
+  font-weight: 800;
+}
+
+.gateway-account-box {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: white;
+  font-family: Sora, Inter, system-ui, sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  word-break: break-word;
+}
+
+.gateway-qr-wrap {
+  width: min(100%, 360px);
+  margin: 0 auto;
+}
+
+.gateway-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.gateway-steps {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 10px;
+  color: var(--muted);
+}
+
+.success-card {
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+  text-align: center;
+}
+
+.success-mark {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(31, 164, 107, 0.14);
+  color: var(--green);
+  font-size: 2.4rem;
+  font-weight: 900;
+}
+
+.success-copy {
+  display: grid;
+  gap: 8px;
+}
+
+.success-summary {
+  width: min(100%, 560px);
 }
 
 .wide {
@@ -889,6 +1068,12 @@ input {
 
 .card-highlight {
   outline: 2px solid rgba(13, 99, 200, 0.12);
+}
+
+.info-chip.expired {
+  background: rgba(216, 75, 75, 0.14);
+  color: var(--red);
+  border-color: rgba(216, 75, 75, 0.1);
 }
 
 .nfc-ring {
@@ -1204,7 +1389,9 @@ input {
   .stats-grid,
   .dashboard-hero-grid,
   .dashboard-split,
-  .qr-grid {
+  .qr-grid,
+  .topup-grid,
+  .gateway-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1262,6 +1449,15 @@ input {
 
   .page-banner-meta {
     justify-content: flex-start;
+  }
+
+  .topup-cta-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .method-grid {
+    grid-template-columns: 1fr;
   }
 
   .scanner-view,
@@ -1333,5 +1529,10 @@ input {
 
   .dashboard-balance {
     font-size: clamp(1.8rem, 6.5vw, 2.5rem);
+  }
+
+  .gateway-account-box {
+    font-size: 1.02rem;
+    letter-spacing: 0.08em;
   }
 }

@@ -99,7 +99,7 @@ export default function DashboardPage() {
             </div>
           </div>
           <div className="hero-actions hero-actions-stack">
-            <button className="primary-btn" type="button" onClick={() => navigate('/payment')}>
+            <button className="primary-btn" type="button" onClick={() => navigate('/topup')}>
               Top Up
             </button>
             <button className="secondary-btn" type="button" onClick={() => navigate('/qr')}>
@@ -114,7 +114,7 @@ export default function DashboardPage() {
             <span className="chip">1 tap</span>
           </div>
           <div className="quick-actions">
-            <button className="quick-action primary" type="button" onClick={() => navigate('/payment')}>
+            <button className="quick-action primary" type="button" onClick={() => navigate('/topup')}>
               <span className="quick-icon">⬆️</span>
               <span>Top Up</span>
             </button>
@@ -140,16 +140,27 @@ export default function DashboardPage() {
           value={dashboard.stats.cards_active}
           hint={`${dashboard.cards.filter((card) => card.rawStatus === 'locked').length} terkunci`}
         />
-        <StatCard
-          label="Transaksi hari ini"
-          value={dashboard.stats.transactions_today}
-          hint="Data terbaru dari backend"
-        />
+          <StatCard
+            label="Transaksi hari ini"
+            value={dashboard.stats.transactions_today}
+            hint="Data terbaru dari backend"
+          />
         <StatCard
           label="Voucher"
           value={dashboard.stats.vouchers_available}
           hint={`${dashboard.vouchers.length} promo tersedia`}
         />
+      </section>
+
+      <section className="card section-card topup-cta-card">
+        <div>
+          <p className="eyebrow">Top Up Saldo</p>
+          <h3 className="cta-title">Isi saldo lewat simulasi gateway</h3>
+          <p className="muted">Pilih nominal, lanjut ke instruksi pembayaran palsu, lalu uji status sukses atau gagal.</p>
+        </div>
+        <button className="primary-btn" type="button" onClick={() => navigate('/topup')}>
+          Buka Top Up
+        </button>
       </section>
 
       <section className="grid dashboard-split">
