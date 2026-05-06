@@ -111,11 +111,14 @@ export default function DashboardPage() {
         </div>
 
         <div className="dashboard-hero-side">
-          <div className="balance-visual">
-            <div className="balance-ring" />
-            <div className="balance-meta">
+          <div className="dashboard-status-card">
+            <div className="balance-visual">
+              <div className="balance-ring" />
+            </div>
+            <div className="dashboard-status-copy">
               <span className="balance-label">Status akun</span>
               <strong>{dashboard.user.status === 'active' ? 'Aktif' : 'Nonaktif'}</strong>
+              <p className="muted">Semua layanan pembayaran bisa dipakai dari perangkat ini.</p>
             </div>
           </div>
           <div className="hero-actions hero-actions-stack">
@@ -160,11 +163,11 @@ export default function DashboardPage() {
           value={dashboard.stats.cards_active}
           hint={`${dashboard.cards.filter((card) => card.rawStatus === 'locked').length} terkunci`}
         />
-          <StatCard
-            label="Transaksi hari ini"
-            value={dashboard.stats.transactions_today}
-            hint="Data terbaru dari backend"
-          />
+        <StatCard
+          label="Transaksi hari ini"
+          value={dashboard.stats.transactions_today}
+          hint="Data terbaru dari backend"
+        />
         <StatCard
           label="Voucher"
           value={dashboard.stats.vouchers_available}
