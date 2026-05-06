@@ -51,18 +51,18 @@ input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 16px 20px;
+  gap: 12px;
+  padding: 10px 18px;
   background: rgba(249, 251, 255, 0.84);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(18, 49, 77, 0.08);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   min-width: 0;
 }
 
@@ -77,9 +77,9 @@ input {
 .brand-mark,
 .avatar,
 .profile-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
   display: grid;
   place-items: center;
   background: linear-gradient(135deg, var(--blue), var(--blue-dark));
@@ -99,7 +99,7 @@ input {
 
 .brand-copy {
   display: grid;
-  gap: 2px;
+  gap: 0;
 }
 
 .brand span,
@@ -116,13 +116,15 @@ input {
 }
 
 .brand-title {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 800;
+  line-height: 1.1;
 }
 
 .brand-subtitle {
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   color: var(--muted);
+  line-height: 1.1;
 }
 
 .page-title {
@@ -133,10 +135,41 @@ input {
 .topbar-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-shrink: 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-end;
+}
+
+.topbar-actions .primary-btn,
+.topbar-actions .ghost-btn,
+.topbar-actions .profile-pill,
+.topbar-actions .icon-btn {
+  min-height: 40px;
+}
+
+.topbar-actions .primary-btn,
+.topbar-actions .ghost-btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.topbar-actions .profile-pill {
+  padding: 4px 10px 4px 5px;
+  border-radius: 999px;
+}
+
+.topbar-actions .icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+
+.topbar-actions .profile-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.78rem;
 }
 
 .card,
@@ -150,7 +183,7 @@ input {
 .main {
   width: min(100%, 1200px);
   margin: 0 auto;
-  padding: 24px 20px calc(118px + env(safe-area-inset-bottom));
+  padding: 20px 20px calc(118px + env(safe-area-inset-bottom));
   flex: 1;
 }
 
@@ -1624,7 +1657,8 @@ input {
   }
 
   .topbar {
-    padding: 14px 16px;
+    padding: 9px 14px;
+    gap: 10px;
   }
 
   .main {
@@ -1713,14 +1747,7 @@ input {
   }
 
   .topbar-actions {
-    width: 100%;
-  }
-
-  .topbar-actions .primary-btn,
-  .topbar-actions .ghost-btn,
-  .topbar-actions .profile-pill {
-    flex: 1 1 auto;
-    justify-content: center;
+    gap: 6px;
   }
 }
 
@@ -1733,8 +1760,8 @@ input {
   }
 
   .topbar {
-    gap: 10px;
-    align-items: stretch;
+    gap: 8px;
+    align-items: center;
   }
 
   .brand-subtitle,
@@ -1743,11 +1770,11 @@ input {
   }
 
   .topbar {
-    padding: 14px 14px;
+    padding: 8px 12px;
   }
 
   .brand-button {
-    width: 100%;
+    max-width: 100%;
   }
 
   .main {
@@ -1800,13 +1827,7 @@ input {
   }
 
   .topbar-actions {
-    gap: 8px;
-  }
-
-  .topbar-actions .primary-btn,
-  .topbar-actions .ghost-btn,
-  .topbar-actions .profile-pill {
-    width: 100%;
+    gap: 6px;
   }
 
   .bottom-nav {
@@ -1859,18 +1880,18 @@ input {
 
 @media (max-width: 480px) {
   .topbar {
-    padding: 12px;
+    padding: 7px 10px;
   }
 
   .brand-mark,
   .avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
   }
 
   .brand-title {
-    font-size: 0.98rem;
+    font-size: 0.9rem;
   }
 
   .main {
