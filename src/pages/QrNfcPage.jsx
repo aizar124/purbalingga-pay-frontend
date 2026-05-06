@@ -31,7 +31,7 @@ export default function QrNfcPage() {
       return;
     }
 
-    const scanKey = `${parsed.cardId}|${parsed.nominal}|${parsed.merchantName}`.toUpperCase();
+    const scanKey = `${parsed.sessionId || parsed.cardId}|${parsed.nominal}|${parsed.merchantName}`.toUpperCase();
 
     if (lastProcessedScanRef.current === scanKey || submittingScan) {
       return;
@@ -69,7 +69,9 @@ export default function QrNfcPage() {
           {
             type: TICKET_QRIS_MESSAGE_TYPE,
             rawValue: parsed.rawValue,
+            cardId: parsed.cardId || '',
             sessionId: parsed.sessionId || '',
+            paymentType: parsed.paymentType || '',
             merchantName: parsed.merchantName,
             nominal: parsed.nominal,
             wisataName: parsed.wisataName || '',

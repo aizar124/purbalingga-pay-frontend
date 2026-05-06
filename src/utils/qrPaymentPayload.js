@@ -29,8 +29,11 @@ function assignField(target, key, value) {
     return;
   }
 
-  if (['card_id', 'card', 'cardcode', 'card_code'].includes(normalizedKey)) {
+  if (['card_id', 'card', 'cardcode', 'card_code', 'cardid', 'session_id', 'sessionid'].includes(normalizedKey)) {
     target.cardId = normalizedValue;
+    if (!target.sessionId) {
+      target.sessionId = normalizedValue;
+    }
     return;
   }
 
@@ -49,6 +52,11 @@ function assignField(target, key, value) {
 
   if (['merchant_name', 'merchant', 'merchantname', 'store_name', 'title'].includes(normalizedKey)) {
     target.merchantName = normalizedValue;
+    return;
+  }
+
+  if (['payment_type', 'paymenttype', 'type'].includes(normalizedKey)) {
+    target.paymentType = normalizedValue;
     return;
   }
 
@@ -142,13 +150,18 @@ export function parseQrPaymentPayload(rawValue) {
     payload.nominal = payload.saldo;
   }
 
-  if (!payload.cardId || !payload.nominal || !payload.merchantName || !Number.isFinite(payload.nominal)) {
+  const cardId = payload.cardId || payload.sessionId || '';
+  const nominal = Number.isFinite(payload.nominal) ? payload.nominal : NaN;
+
+  if (!cardId || !Number.isFinite(nominal) || !payload.merchantName) {
     return {
       rawValue: raw,
-      cardId: payload.cardId || '',
-      nominal: Number.isFinite(payload.nominal) ? payload.nominal : NaN,
+      cardId,
+      sessionId: payload.sessionId || cardId,
+      nominal,
       saldo: Number.isFinite(payload.saldo) ? payload.saldo : NaN,
       merchantName: payload.merchantName || '',
+      paymentType: payload.paymentType || '',
       wisataName: payload.wisataName || '',
       description: payload.description || '',
       valid: false,
@@ -157,10 +170,12 @@ export function parseQrPaymentPayload(rawValue) {
 
   return {
     rawValue: raw,
-    cardId: payload.cardId,
-    nominal: payload.nominal,
+    cardId,
+    sessionId: payload.sessionId || cardId,
+    nominal,
     saldo: Number.isFinite(payload.saldo) ? payload.saldo : payload.nominal,
     merchantName: payload.merchantName,
+    paymentType: payload.paymentType || '',
     wisataName: payload.wisataName || '',
     description: payload.description || '',
     valid: true,
