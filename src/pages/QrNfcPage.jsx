@@ -17,7 +17,6 @@ export default function QrNfcPage() {
   const simulatePayload = searchParams.get('simulate');
   const [scannerOpen, setScannerOpen] = useState(false);
   const [notice, setNotice] = useState('');
-  const [scanResult, setScanResult] = useState('');
   const [scannedPayment, setScannedPayment] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState('idle');
   const [submittingScan, setSubmittingScan] = useState(false);
@@ -91,7 +90,6 @@ export default function QrNfcPage() {
 
   const handleDetectedCode = async ({ value, format }) => {
     const parsed = parseQrPaymentPayload(value);
-    setScanResult(`${format}: ${value}`);
     await processPaymentPayload(parsed, 'QR');
   };
 
@@ -101,7 +99,6 @@ export default function QrNfcPage() {
     }
 
     const parsed = parseQrPaymentPayload(simulatePayload);
-    setScanResult(`SIMULATE: ${simulatePayload}`);
     processPaymentPayload(parsed, 'SIMULATE');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, simulatePayload]);
@@ -137,7 +134,6 @@ export default function QrNfcPage() {
                 setNotice('');
                 setPaymentStatus('idle');
                 setScannedPayment(null);
-                setScanResult('');
                 setScannerOpen(true);
               }}
               disabled={activeTab !== 'qr' || Boolean(simulatePayload)}
@@ -152,7 +148,6 @@ export default function QrNfcPage() {
             onDetected={handleDetectedCode}
           />
           {simulatePayload ? <p className="stat-hint center">Mode simulasi aktif dari URL.</p> : null}
-          {scanResult ? <p className="stat-hint center">Hasil terakhir: {scanResult}</p> : null}
           {scannedPayment?.valid ? (
             <div className="scanner-payment-summary">
               <div className="section-head scanner-payment-heading">

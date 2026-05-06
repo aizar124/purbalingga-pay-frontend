@@ -21,9 +21,6 @@ export default function Topbar() {
       </button>
 
       <div className="topbar-actions">
-        <button className="ghost-btn icon-btn" type="button" aria-label="Notifikasi">
-          <span className="icon-badge" aria-hidden="true">🔔</span>
-        </button>
         {isAuthenticated ? (
           <>
             <button className="profile-pill" type="button" onClick={goProfile}>
