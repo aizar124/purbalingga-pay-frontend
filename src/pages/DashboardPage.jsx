@@ -10,7 +10,7 @@ import CardList from '../components/CardList';
 
 export default function DashboardPage() {
   const navigate = useNavigate();
-  const { token, updateUser } = useAuth();
+  const { token, user, updateUser } = useAuth();
   const [dashboard, setDashboard] = useState({
     user: { name: 'Pengguna Purbalingga', role: 'Warga', balance: 0 },
     cards: [],
@@ -45,6 +45,26 @@ export default function DashboardPage() {
     loadDashboard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    setDashboard((current) => ({
+      ...current,
+      user: {
+        ...current.user,
+        name: user.name ?? current.user.name,
+        role: user.role ?? current.user.role,
+        balance: user.balance ?? current.user.balance,
+        status: user.status ?? current.user.status,
+        email: user.email ?? current.user.email,
+        phone: user.phone ?? current.user.phone,
+        avatarUrl: user.avatarUrl ?? current.user.avatarUrl,
+      },
+    }));
+  }, [user]);
 
   if (loading) {
     return (
