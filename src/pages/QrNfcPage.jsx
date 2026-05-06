@@ -149,30 +149,78 @@ export default function QrNfcPage() {
           />
           {simulatePayload ? <p className="stat-hint center">Mode simulasi aktif dari URL.</p> : null}
           {scannedPayment?.valid ? (
-            <div className="scanner-payment-summary">
-              <div className="section-head scanner-payment-heading">
-                <p className="scanner-payment-title">Konfirmasi Pembayaran</p>
-                <span className={`chip ${paymentStatus === 'success' ? 'status-success' : paymentStatus === 'error' ? 'status-error' : ''}`}>
+            <div
+              className={`scanner-payment-summary ${
+                paymentStatus === 'success'
+                  ? 'is-success'
+                  : paymentStatus === 'error'
+                    ? 'is-error'
+                    : paymentStatus === 'processing'
+                      ? 'is-processing'
+                      : ''
+              }`}
+            >
+              <div className="scanner-payment-top">
+                <div className="scanner-payment-icon" aria-hidden="true">
+                  {scannedPayment.merchantName?.[0]?.toUpperCase() || 'P'}
+                </div>
+                <div className="scanner-payment-head-copy">
+                  <p className="scanner-payment-kicker">Konfirmasi Pembayaran</p>
+                  <h4>{scannedPayment.merchantName || 'Merchant'}</h4>
+                  <p className="scanner-payment-subtitle">
+                    {scannedPayment.wisataName || scannedPayment.description || 'Pembayaran siap diproses.'}
+                  </p>
+                </div>
+                <span
+                  className={`scanner-payment-badge ${
+                    paymentStatus === 'success'
+                      ? 'status-success'
+                      : paymentStatus === 'error'
+                        ? 'status-error'
+                        : paymentStatus === 'processing'
+                          ? 'status-processing'
+                          : ''
+                  }`}
+                >
                   {paymentStatus === 'processing' ? 'Memproses' : paymentStatus === 'success' ? 'Berhasil' : paymentStatus === 'error' ? 'Gagal' : 'Siap'}
                 </span>
               </div>
-              <label>
-                Merchant
-                <input type="text" value={scannedPayment.merchantName || ''} disabled />
-              </label>
-              <label>
-                Harga
-                <input type="text" value={formatCurrency(scannedPayment.nominal || 0)} disabled />
-              </label>
-              <p className="scanner-payment-line">
-                {submittingScan || paymentStatus === 'processing'
-                  ? 'Pembayaran berjalan otomatis dari saldo Purbalingga Pay.'
-                  : paymentStatus === 'success'
-                    ? 'Pembayaran selesai dan popup scan sudah ditutup.'
-                    : paymentStatus === 'error'
-                      ? 'Periksa QR atau saldo lalu scan ulang.'
-                      : 'Pembayaran otomatis siap dijalankan.'}
-              </p>
+
+              <div className="scanner-payment-amount">
+                <span>Nominal</span>
+                <strong>{formatCurrency(scannedPayment.nominal || 0)}</strong>
+              </div>
+
+              <div className="scanner-payment-grid">
+                <div className="scanner-payment-row">
+                  <span>Metode</span>
+                  <strong>{scannedPayment.paymentType || 'QRIS'}</strong>
+                </div>
+                <div className="scanner-payment-row">
+                  <span>Merchant</span>
+                  <strong>{scannedPayment.merchantName || '-'}</strong>
+                </div>
+                <div className="scanner-payment-row">
+                  <span>Referensi</span>
+                  <strong>{scannedPayment.sessionId || scannedPayment.cardId || '-'}</strong>
+                </div>
+                <div className="scanner-payment-row">
+                  <span>Tujuan</span>
+                  <strong>{scannedPayment.wisataName || 'Pembayaran umum'}</strong>
+                </div>
+              </div>
+
+              <div className="scanner-payment-footer">
+                <p className="scanner-payment-line">
+                  {submittingScan || paymentStatus === 'processing'
+                    ? 'Pembayaran berjalan otomatis dari saldo Purbalingga Pay.'
+                    : paymentStatus === 'success'
+                      ? 'Pembayaran selesai dan popup scan sudah ditutup.'
+                      : paymentStatus === 'error'
+                        ? 'Periksa QR atau saldo lalu scan ulang.'
+                        : 'Pembayaran otomatis siap dijalankan.'}
+                </p>
+              </div>
             </div>
           ) : null}
         </article>

@@ -1179,34 +1179,176 @@ input {
 }
 
 .scanner-payment-summary {
-  width: min(100%, 320px);
+  width: min(100%, 420px);
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(13, 99, 200, 0.16), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 249, 255, 0.94));
+  border: 1px solid rgba(13, 99, 200, 0.12);
+  box-shadow: 0 22px 48px rgba(13, 99, 200, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.scanner-payment-summary::after {
+  content: "";
+  position: absolute;
+  inset: auto -40px -40px auto;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13, 99, 200, 0.12), transparent 68%);
+  pointer-events: none;
+}
+
+.scanner-payment-summary.is-success {
+  border-color: rgba(31, 164, 107, 0.16);
+}
+
+.scanner-payment-summary.is-error {
+  border-color: rgba(216, 75, 75, 0.16);
+}
+
+.scanner-payment-summary.is-processing {
+  border-color: rgba(13, 99, 200, 0.18);
+}
+
+.scanner-payment-top {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.scanner-payment-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  color: white;
+  font-family: Sora, Inter, system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  box-shadow: 0 16px 28px rgba(13, 99, 200, 0.18);
+}
+
+.scanner-payment-head-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.scanner-payment-kicker {
+  margin: 0;
+  color: var(--blue);
+  font-weight: 800;
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.scanner-payment-head-copy h4 {
+  margin: 0;
+  font-family: Sora, Inter, system-ui, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.scanner-payment-subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.scanner-payment-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: start;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.scanner-payment-amount {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(13, 99, 200, 0.05);
+  border: 1px solid rgba(13, 99, 200, 0.08);
+}
+
+.scanner-payment-amount span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 800;
+}
+
+.scanner-payment-amount strong {
+  font-family: Sora, Inter, system-ui, sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  line-height: 1.1;
+}
+
+.scanner-payment-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.scanner-payment-row {
   display: grid;
   gap: 6px;
   padding: 14px 16px;
   border-radius: 18px;
-  background: rgba(13, 99, 200, 0.06);
-  border: 1px solid rgba(13, 99, 200, 0.1);
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(18, 49, 77, 0.08);
 }
 
-.scanner-payment-title {
-  margin: 0 0 2px;
+.scanner-payment-row span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   font-weight: 800;
 }
 
-.scanner-payment-heading {
-  margin-bottom: 8px;
+.scanner-payment-row strong {
+  font-size: 0.94rem;
+  word-break: break-word;
+}
+
+.scanner-payment-footer {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 8px;
+  padding-top: 2px;
 }
 
 .scanner-payment-line {
   margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
-}
-
-.scanner-payment-summary input:disabled {
-  background: rgba(255, 255, 255, 0.7);
-  color: var(--ink);
-  cursor: not-allowed;
+  line-height: 1.55;
 }
 
 .status-success {
@@ -1217,6 +1359,11 @@ input {
 .status-error {
   background: rgba(216, 75, 75, 0.14);
   color: var(--red);
+}
+
+.status-processing {
+  background: rgba(13, 99, 200, 0.14);
+  color: var(--blue);
 }
 
 .scanner-chip-error {
@@ -1938,6 +2085,19 @@ input {
   .scanner-payment-summary,
   .scanner-status {
     width: 100%;
+  }
+
+  .scanner-payment-top {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .scanner-payment-badge {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .scanner-payment-grid {
+    grid-template-columns: 1fr;
   }
 
   .dashboard-status-card {
