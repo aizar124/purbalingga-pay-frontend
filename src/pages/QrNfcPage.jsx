@@ -8,7 +8,7 @@ import CameraBarcodeScanner from '../components/CameraBarcodeScanner';
 import { parseQrPaymentPayload } from '../utils/qrPaymentPayload';
 
 const TICKET_QRIS_MESSAGE_TYPE = 'PURBALINGGA_PAY_QRIS_SUCCESS';
-const TICKET_APP_ORIGIN = import.meta.env.VITE_TICKET_APP_ORIGIN || 'https://smartcity.qode.my.id';
+const TICKET_APP_ORIGIN = import.meta.env.VITE_TICKET_APP_ORIGIN || 'https://smartpay.qode.my.id';
 
 export default function QrNfcPage() {
   const { token, updateUser } = useAuth();
