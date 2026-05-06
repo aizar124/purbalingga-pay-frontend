@@ -26,6 +26,7 @@ body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
   color: var(--ink);
+  overflow-x: hidden;
   background:
     radial-gradient(circle at top left, rgba(13, 99, 200, 0.16), transparent 28%),
     radial-gradient(circle at bottom right, rgba(31, 164, 107, 0.12), transparent 26%),
@@ -55,12 +56,14 @@ input {
   background: rgba(249, 251, 255, 0.84);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(18, 49, 77, 0.08);
+  flex-wrap: wrap;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
 }
 
 .brand-button {
@@ -132,6 +135,8 @@ input {
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .card,
@@ -145,7 +150,7 @@ input {
 .main {
   width: min(100%, 1200px);
   margin: 0 auto;
-  padding: 24px 20px 118px;
+  padding: 24px 20px calc(118px + env(safe-area-inset-bottom));
   flex: 1;
 }
 
@@ -177,6 +182,7 @@ input {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .icon-btn {
@@ -504,6 +510,7 @@ input {
   align-items: center;
   gap: 12px;
   margin-bottom: 16px;
+  min-width: 0;
 }
 
 .chip {
@@ -592,6 +599,7 @@ input {
   gap: 12px;
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
+  min-width: 0;
 }
 
 .list-row:last-child {
@@ -1264,10 +1272,11 @@ input {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
   z-index: 30;
   width: min(calc(100% - 24px), 640px);
   padding: 8px;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom));
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(18px);
@@ -1464,6 +1473,47 @@ input {
   .scanner-status {
     width: 100%;
   }
+
+  .section-head,
+  .summary-row,
+  .gateway-row,
+  .list-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .list-row {
+    padding: 12px 0;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-banner-meta,
+  .info-chips,
+  .button-row,
+  .gateway-actions,
+  .hero-actions {
+    width: 100%;
+  }
+
+  .hero-actions > *,
+  .button-row > *,
+  .gateway-actions > * {
+    flex: 1 1 180px;
+  }
+
+  .topbar-actions {
+    width: 100%;
+  }
+
+  .topbar-actions .primary-btn,
+  .topbar-actions .ghost-btn,
+  .topbar-actions .profile-pill {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1475,7 +1525,8 @@ input {
   }
 
   .topbar {
-    gap: 12px;
+    gap: 10px;
+    align-items: stretch;
   }
 
   .brand-subtitle,
@@ -1487,8 +1538,12 @@ input {
     padding: 14px 14px;
   }
 
+  .brand-button {
+    width: 100%;
+  }
+
   .main {
-    padding: 16px 12px 120px;
+    padding: 16px 12px calc(122px + env(safe-area-inset-bottom));
   }
 
   .section-card,
@@ -1534,5 +1589,118 @@ input {
   .gateway-account-box {
     font-size: 1.02rem;
     letter-spacing: 0.08em;
+  }
+
+  .topbar-actions {
+    gap: 8px;
+  }
+
+  .topbar-actions .primary-btn,
+  .topbar-actions .ghost-btn,
+  .topbar-actions .profile-pill {
+    width: 100%;
+  }
+
+  .bottom-nav {
+    width: calc(100% - 12px);
+    bottom: calc(8px + env(safe-area-inset-bottom));
+  }
+
+  .bottom-nav-item {
+    padding: 8px 6px;
+  }
+
+  .bottom-nav-label {
+    font-size: 0.78rem;
+  }
+
+  .page-banner,
+  .topup-cta-card {
+    gap: 12px;
+  }
+
+  .stat-card,
+  .section-card {
+    padding: 18px;
+  }
+
+  .profile-card {
+    justify-items: stretch;
+  }
+
+  .profile-grid {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 12px;
+  }
+
+  .brand-mark,
+  .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+  }
+
+  .brand-title {
+    font-size: 0.98rem;
+  }
+
+  .main {
+    padding: 14px 10px calc(116px + env(safe-area-inset-bottom));
+  }
+
+  .hero-actions > *,
+  .button-row > *,
+  .gateway-actions > * {
+    flex-basis: 100%;
+  }
+
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .info-chips {
+    gap: 8px;
+  }
+
+  .info-chip,
+  .chip {
+    font-size: 0.75rem;
+  }
+
+  .dashboard-balance {
+    font-size: clamp(1.65rem, 8vw, 2.2rem);
+  }
+
+  .bottom-nav {
+    width: calc(100% - 10px);
+    border-radius: 18px;
+  }
+
+  .bottom-nav-item {
+    min-height: 58px;
+  }
+
+  .bottom-nav-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .scanner-payment-summary,
+  .scanner-status {
+    width: 100%;
+  }
+
+  .nfc-ring {
+    width: 180px;
+    height: 180px;
+  }
+
+  .qr-code-frame {
+    padding: 14px;
   }
 }
