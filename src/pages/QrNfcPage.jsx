@@ -8,6 +8,7 @@ import CameraBarcodeScanner from '../components/CameraBarcodeScanner';
 import { parseQrPaymentPayload } from '../utils/qrPaymentPayload';
 
 const TICKET_QRIS_MESSAGE_TYPE = 'PURBALINGGA_PAY_QRIS_SUCCESS';
+const TICKET_QRIS_SCAN_MESSAGE_TYPE = 'PURBALINGGA_PAY_QRIS_SCANNED';
 const TICKET_APP_ORIGIN = import.meta.env.VITE_TICKET_APP_ORIGIN || 'https://smartpay.qode.my.id';
 
 export default function QrNfcPage() {
@@ -21,6 +22,25 @@ export default function QrNfcPage() {
   const [paymentStatus, setPaymentStatus] = useState('idle');
   const [submittingScan, setSubmittingScan] = useState(false);
   const lastProcessedScanRef = useRef('');
+
+  const postTicketAppMessage = (type, parsed) => {
+    if (window.opener && !window.opener.closed) {
+      window.opener.postMessage(
+        {
+          type,
+          rawValue: parsed.rawValue,
+          cardId: parsed.cardId || '',
+          sessionId: parsed.sessionId || '',
+          paymentType: parsed.paymentType || '',
+          merchantName: parsed.merchantName,
+          nominal: parsed.nominal,
+          wisataName: parsed.wisataName || '',
+          description: parsed.description || '',
+        },
+        TICKET_APP_ORIGIN,
+      );
+    }
+  };
 
   const processPaymentPayload = async (parsed, sourceLabel = 'QR') => {
     if (!parsed?.valid) {
@@ -43,6 +63,8 @@ export default function QrNfcPage() {
     setPaymentStatus('processing');
     setNotice(`${sourceLabel}: memproses pembayaran ke ${parsed.merchantName}...`);
 
+    postTicketAppMessage(TICKET_QRIS_SCAN_MESSAGE_TYPE, parsed);
+
     try {
       const response = await createTransactionApi(token, {
         type: 'payment',
@@ -63,22 +85,7 @@ export default function QrNfcPage() {
         ' berhasil.'
       );
 
-      if (window.opener && !window.opener.closed) {
-        window.opener.postMessage(
-          {
-            type: TICKET_QRIS_MESSAGE_TYPE,
-            rawValue: parsed.rawValue,
-            cardId: parsed.cardId || '',
-            sessionId: parsed.sessionId || '',
-            paymentType: parsed.paymentType || '',
-            merchantName: parsed.merchantName,
-            nominal: parsed.nominal,
-            wisataName: parsed.wisataName || '',
-            description: parsed.description || '',
-          },
-          TICKET_APP_ORIGIN,
-        );
-      }
+      postTicketAppMessage(TICKET_QRIS_MESSAGE_TYPE, parsed);
     } catch (scanError) {
       lastProcessedScanRef.current = '';
       setPaymentStatus('error');
